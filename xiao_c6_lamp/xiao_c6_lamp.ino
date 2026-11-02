@@ -35,7 +35,7 @@
 
 #define LED_PIN        D0          // DI pad of the ring
 #define LED_COUNT      8
-#define MAX_CURRENT_MA 400         // the ring is dimmed as a whole to stay below this
+#define MAX_CURRENT_MA 500         // the ring is dimmed as a whole to stay below this; full white needs about 480
 #define CHANNEL_MA     20          // current of one colour of one LED at full brightness
 #define WHITE_BALANCE_R 1.0f       // scale the colours if white looks tinted on your ring
 #define WHITE_BALANCE_G 1.0f

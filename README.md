@@ -17,7 +17,7 @@ It runs from USB and never sleeps, which makes it a **Zigbee router** as well: i
 - The light comes back on straight away after a power cut, without waiting for the network
 - Works as a **Zigbee router**
 - **BOOT** button: short press switches the lamp on or off, hold 5 s to leave the network
-- Current limit for the ring (400 mA by default), so a laptop USB port is enough
+- Full brightness of the LEDs, with an optional current limit for weak USB ports
 - Identify from Zigbee2MQTT makes the ring blink
 - While it has no network, one LED breathes blue when the lamp is off
 
@@ -52,7 +52,7 @@ Notes:
 - The ring is drawn from the back, with its pads in the order printed on it. Rings from other sellers may order them differently: follow the names printed on your own board and ring. The wiring picture is drawn by [`docs/make_wiring.py`](docs/make_wiring.py).
 - DO of the ring stays free. It is where a second ring would chain on. Data only flows from DI to DO, so a ring wired to DO stays dark.
 - The ring runs from 5 V while the XIAO's data pin is 3.3 V. That is just below what the WS2812B datasheet asks for, and works with almost every ring on a short wire. If the LEDs flicker or show wrong colours, add a 74AHCT125 level shifter in the data line.
-- At full white the 8 LEDs could draw up to about 480 mA. The firmware dims the whole ring to stay below `MAX_CURRENT_MA`.
+- At full white the 8 LEDs could draw up to about 480 mA. Use a 5 V 1 A supply; to run from a weak USB port, lower `MAX_CURRENT_MA` and the firmware dims the whole ring to stay below it.
 
 ## Flashing
 
@@ -96,7 +96,7 @@ The values at the top of [`xiao_c6_lamp.ino`](xiao_c6_lamp/xiao_c6_lamp.ino):
 | `USE_EXTERNAL_ANTENNA` | `0` | `1` uses the U.FL connector instead of the on-board antenna |
 | `LED_PIN` | `D0` | Data pin of the ring |
 | `LED_COUNT` | `8` | LEDs on the ring |
-| `MAX_CURRENT_MA` | `400` | The ring is dimmed as a whole to stay below this |
+| `MAX_CURRENT_MA` | `500` | The ring is dimmed as a whole to stay below this. Full white needs about 480 mA, so 500 never dims it; lower it for a weak USB port |
 | `WHITE_BALANCE_R/G/B` | `1.0` | Scale a colour down if white looks tinted |
 | `FADE_MS` | `400` | Time for every change |
 | `DEFAULT_LEVEL`, `DEFAULT_MIREDS` | `127`, `370` | Light of a brand new lamp: half brightness, 2700 K |
