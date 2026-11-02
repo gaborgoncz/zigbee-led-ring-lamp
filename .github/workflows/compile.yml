@@ -8,7 +8,8 @@ on:
 
 jobs:
   compile:
-    runs-on: ubuntu-latest
+    # arduino/compile-sketches@v1 installs a Python that ubuntu-latest (26.04) does not offer
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
